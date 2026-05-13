@@ -72,7 +72,11 @@ namespace LanguageOneStringTableHelper
 		if (StringTable)
 		{
 			FStringTableRef MutableData = StringTable->GetMutableStringTable();
+#if (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 8)
+			MutableData->SetSourceString(FTextKey(Key), Value, FString());
+#else
 			MutableData->SetSourceString(FTextKey(Key), Value);
+#endif
 		}
 	}
 	

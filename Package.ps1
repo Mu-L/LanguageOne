@@ -16,7 +16,8 @@ $EngineVersions = @(
     @{ Version = "5.4"; VersionString = "5.4.0" },
     @{ Version = "5.5"; VersionString = "5.5.0" },
     @{ Version = "5.6"; VersionString = "5.6.0" },
-    @{ Version = "5.7"; VersionString = "5.7.0" }
+    @{ Version = "5.7"; VersionString = "5.7.0" },
+    @{ Version = "5.8"; VersionString = "5.8.0" }
 )
 
 Write-Host "================================================" -ForegroundColor Cyan
