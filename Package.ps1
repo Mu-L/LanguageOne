@@ -65,10 +65,9 @@ for ($i = 0; $i -lt $TotalVersions; $i++) {
     $Version = $EngineVer.Version
     $VersionString = $EngineVer.VersionString
     
-    # Calculate sort index (Newest version gets smallest number to appear first)
-    # UE 5.7 is last in array, we want it to be 01
-    # UE 5.1 is first in array, we want it to be 07
-    $SortIndex = $TotalVersions - $i
+    # Oldest version gets smallest number (stable: adding new versions only appends a new index)
+    # UE 5.1 is first in array -> 01, UE 5.8 -> 08, UE 5.9 (future) -> 09
+    $SortIndex = $i + 1
     $SortPrefix = "{0:D2}" -f $SortIndex
     
     Write-Host "================================================" -ForegroundColor Yellow
@@ -110,8 +109,8 @@ for ($i = 0; $i -lt $TotalVersions; $i++) {
     [System.IO.File]::WriteAllText($UpluginFilePath, $jsonContent, $utf8NoBom)
     
     # Create ZIP package
-    # Naming format: 01_LanguageOne_UE5.7_v1.2.zip
-    $ZipName = "${SortPrefix}_${PluginName}_UE${Version}_v$($OriginalUplugin.VersionName).zip"
+    # Naming format: 01_LanguageOne_UE5.8.zip (no version suffix to keep Fab links stable across updates)
+    $ZipName = "${SortPrefix}_${PluginName}_UE${Version}.zip"
     $ZipPath = "$OutputDir\$ZipName"
     
     Write-Host "  Creating ZIP: $ZipName" -ForegroundColor Green
